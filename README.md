@@ -1,12 +1,16 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+First Step is install the npm dependencies (in case of exist delete node_modules and package-lock.json) and then
+
+```
+npm install
+```
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npm run test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
@@ -39,32 +43,129 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### `Project Structure`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. prueba-modelo
+   -public
+   -src
+    -components
+     -Inputs
+      -Checkbox.js
+      -Email.js
+      -PhoneNumber.js
+      -Select.js
+      -Text.js
+       -Dispatch
+     -hooks
+      -useSendPost.js
+     -questions
+      -Cuestions.json
+     -App.js
+     -FormContext.js
+     -index.css
+     -index.js
+   -craco.config.js
+   -package.json
+   -README.md
+   -tailwind.config.js
+     
 
-### Code Splitting
+     ### `Usage`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+     add your questions in json file, there is 5 types of inputs:
 
-### Analyzing the Bundle Size
+     1. Text
+     2. Email
+     3. Phone
+     4. Checkbox
+     5. Select
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+     ```
+     [
+    {
+        
+        "fields": [
+            {
+                "field_id": "english_name",
+                "field_mandatory": "yes",
+                "field_placeholder": "Name",
+                "field_type": "text",
+                "field_value": ""
+            },
+            {
+                "field_id": "email",
+                "field_mandatory": "yes",
+                "field_placeholder": "Email",
+                "field_type": "email",
+                "field_value": ""
+            },
+            {
+                "field_id": "employment",
+                "field_value": "",
+                "field_mandatory": "yes",
+                "field_options": [
+                    {
+                        "option_label": "Full-Time"
+                    },
+                    {
+                        "option_label": "Part-Time"
+                    }
+                ],
+                "field_type": "select"
+                
+            },
+            {
+                "field_id": "NoticePrivacity",
+                "field_label": "I accept the terms and conditions of the privacy notice",
+                "field_type": "checkbox",
+                "field_value": ""
+            },
+            {
+                "field_id": "NumberPhone",
+                "field_mandatory": "yes",
+                "field_placeholder": "+55 240 749 47",
+                "field_type": "tel",
+                "field_value": ""
+            }
+        ]
+    }
+]
+```
 
-### Making a Progressive Web App
+  ### `Result`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+I send data to localStore
 
-### Advanced Configuration
+```
+localStorage.setItem("User-Data", JSON.stringify(elements));
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+ but if you want exist a fetch Hook called useSendPost for connect with a some API.
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+export const useSendFetch = (url) => {
 
-### `npm run build` fails to minify
+  const sendingData = async (data) => {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+    });
+    const resp = await response.json();
+    // console.log('resp: ', resp);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  };
+  // console.log('state: ', stateData);
+  return sendingData;
+};
+
+
+```

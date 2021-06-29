@@ -1,0 +1,49 @@
+[
+    {
+        
+        "fields": [
+            {
+                "field_id": "english_name",
+                "field_mandatory": "yes",
+                "field_placeholder": "Name",
+                "field_type": "text",
+                "field_value": ""
+            },
+            {
+                "field_id": "email",
+                "field_mandatory": "yes",
+                "field_placeholder": "Email",
+                "field_type": "email",
+                "field_value": ""
+            },
+            {
+                "field_id": "employment",
+                "field_value": "",
+                "field_mandatory": "yes",
+                "field_options": [
+                    {
+                        "option_label": "Full-Time"
+                    },
+                    {
+                        "option_label": "Part-Time"
+                    }
+                ],
+                "field_type": "select"
+                
+            },
+            {
+                "field_id": "NoticePrivacity",
+                "field_label": "I accept the terms and conditions of the privacy notice",
+                "field_type": "checkbox",
+                "field_value": ""
+            },
+            {
+                "field_id": "NumberPhone",
+                "field_mandatory": "yes",
+                "field_placeholder": "+55 240 749 47",
+                "field_type": "tel",
+                "field_value": ""
+            }
+        ]
+    }
+]
